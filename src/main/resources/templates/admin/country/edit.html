@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from hotflix.volkovdesign.com/admin/add-item.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jul 2024 09:43:03 GMT -->
+<head>
+    <th:block th:insert="/layout/admin-layout::head"></th:block>
+
+    <meta name="description" content="Online Movies, TV Shows & Cinema HTML Template">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>HotFlix – Online Movies, TV Shows & Cinema HTML Template</title>
+</head>
+
+<body>
+<!-- header -->
+<header class="header" th:insert="/layout/admin-layout::header"></header>
+<!-- end header -->
+
+<!-- sidebar -->
+<div class="sidebar" th:insert="/layout/admin-layout::sidebar"></div>
+<!-- end sidebar -->
+
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Edit country</h2>
+                </div>
+            </div>
+            <!-- end main title -->
+
+            <!-- form -->
+            <div class="col-12">
+                <form th:action="@{|/admin/country/edit/${country.id}|}" method="post" class="sign__form sign__form--add"
+                      th:object="${country}">
+                    <div class="row">
+                        <div class="col-12 col-xl-7">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <input type="text" class="sign__input" placeholder="Country" th:field="*{name}">
+                                        <small style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="sign__btn sign__btn--small"><span>Edit</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end form -->
+        </div>
+    </div>
+</main>
+<!-- end main content -->
+
+<!-- JS -->
+<th:block th:insert="/layout/admin-layout::js"></th:block>
+</body>
+
+<!-- Mirrored from hotflix.volkovdesign.com/admin/add-item.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jul 2024 09:43:03 GMT -->
+</html>

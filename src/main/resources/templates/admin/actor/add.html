@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from hotflix.volkovdesign.com/admin/add-item.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jul 2024 09:43:03 GMT -->
+<head>
+    <th:block th:insert="/layout/admin-layout::head"></th:block>
+
+    <meta name="description" content="Online Movies, TV Shows & Cinema HTML Template">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>HotFlix – Online Movies, TV Shows & Cinema HTML Template</title>
+</head>
+
+<body>
+<!-- header -->
+<header class="header" th:insert="/layout/admin-layout::header"></header>
+<!-- end header -->
+
+<!-- sidebar -->
+<div class="sidebar" th:insert="/layout/admin-layout::sidebar"></div>
+<!-- end sidebar -->
+
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Add new item</h2>
+                </div>
+            </div>
+            <!-- end main title -->
+
+            <!-- form -->
+            <div class="col-12">
+                <form action="/admin/actor/add" method="post" class="sign__form sign__form--add" th:object="${actorRequest}" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-12 col-xl-7">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <input th:field="*{name}" type="text" class="sign__input" placeholder="Name">
+                                        <small style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <textarea th:field="*{description}" id="text" name="text" class="sign__textarea" placeholder="Description"></textarea>
+                                        <small style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <div class="sign__gallery">
+                                            <label id="gallery1" for="sign__gallery-upload">Upload image</label>
+                                            <input data-name="#gallery1" id="sign__gallery-upload" th:field="*{file}" name="gallery" class="sign__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple="">
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--                                <div class="col-12 col-md-6">-->
+<!--                                    <div class="sign__group">-->
+<!--                                        <input type="text" class="sign__input" placeholder="Link to the background (1920x1280)">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-5">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select th:field="*{gender}" class="sign__selectjs" id="sign__quality">
+                                            <option value="true">Male</option>
+                                            <option value="false">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input th:field="*{dob}" type="date" class="sign__input">
+                                        <small style="color: red" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></small>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <select th:field="*{countryId}" class="sign__selectjs" id="sign__countryOnly">
+                                            <option  th:each="ct:${countryList}" th:value="${ct.id}" th:text="${ct.name}" ></option>
+                                        </select>
+<!--                                        <small style="color: red" th:if="${#fields.hasErrors('countryId')}" th:errors="*{countryId}"></small>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!--                        <div class="col-12 col-md-6 col-xl-4">-->
+<!--                            <div class="sign__group">-->
+<!--                                <select class="sign__selectjs" id="sign__director" multiple>-->
+<!--                                    <option value="Matt Jones">Matt Jones</option>-->
+<!--                                    <option value="Gene Graham">Gene Graham</option>-->
+<!--                                    <option value="Rosa Lee">Rosa Lee</option>-->
+<!--                                    <option value="Brian Cranston">Brian Cranston</option>-->
+<!--                                    <option value="Tess Harper">Tess Harper</option>-->
+<!--                                    <option value="Eliza Josceline">Eliza Josceline</option>-->
+<!--                                    <option value="Otto Bree">Otto Bree</option>-->
+<!--                                    <option value="Kathie Corl">Kathie Corl</option>-->
+<!--                                    <option value="Georgiana Patti">Georgiana Patti</option>-->
+<!--                                    <option value="Cong Duong">Cong Duong</option>-->
+<!--                                    <option value="Felix Autumn">Felix Autumn</option>-->
+<!--                                    <option value="Sophie Moore">Sophie Moore</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="col-12 col-md-6 col-xl-8">-->
+<!--                            <div class="sign__group">-->
+<!--                                <select class="sign__selectjs" id="sign__actors" multiple>-->
+<!--                                    <option value="Matt Jones">Matt Jones</option>-->
+<!--                                    <option value="Gene Graham">Gene Graham</option>-->
+<!--                                    <option value="Rosa Lee">Rosa Lee</option>-->
+<!--                                    <option value="Brian Cranston">Brian Cranston</option>-->
+<!--                                    <option value="Tess Harper">Tess Harper</option>-->
+<!--                                    <option value="Eliza Josceline">Eliza Josceline</option>-->
+<!--                                    <option value="Otto Bree">Otto Bree</option>-->
+<!--                                    <option value="Kathie Corl">Kathie Corl</option>-->
+<!--                                    <option value="Georgiana Patti">Georgiana Patti</option>-->
+<!--                                    <option value="Cong Duong">Cong Duong</option>-->
+<!--                                    <option value="Felix Autumn">Felix Autumn</option>-->
+<!--                                    <option value="Sophie Moore">Sophie Moore</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="col-12">-->
+<!--                            <div class="sign__group">-->
+<!--                                <label class="sign__label">Item type:</label>-->
+<!--                                <ul class="sign__radio">-->
+<!--                                    <li>-->
+<!--                                        <input id="type1" type="radio" name="type" data-bs-toggle="collapse" data-bs-target=".multi-collapse" checked="">-->
+<!--                                        <label for="type1">Movie</label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <input id="type2" type="radio" name="type" data-bs-toggle="collapse" data-bs-target=".multi-collapse">-->
+<!--                                        <label for="type2">TV Series</label>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <!-- movie -->
+<!--                        <div class="col-12">-->
+<!--                            <div class="collapse show multi-collapse">-->
+<!--                                <div class="sign__video">-->
+<!--                                    <label id="movie1" for="sign__video-upload">Upload video</label>-->
+<!--                                    <input data-name="#movie1" id="sign__video-upload" name="movie" class="sign__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <!-- end movie -->
+
+                        <!-- tv series -->
+<!--                        <div class="col-12">-->
+<!--                            <div class="collapse multi-collapse">-->
+<!--                                &lt;!&ndash; season &ndash;&gt;-->
+<!--                                <div class="sign__season">-->
+<!--                                    <div class="sign__season-head">-->
+<!--                                        <div class="row">-->
+<!--                                            <div class="col-12">-->
+<!--                                                <span class="sign__episode-title">Season #1</span>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-sm-6 col-md-5 col-xl-6">-->
+<!--                                                <div class="sign__group">-->
+<!--                                                    <input type="text" class="sign__input" placeholder="Season title">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-sm-6 col-md-4 col-xl-4">-->
+<!--                                                <div class="sign__group">-->
+<!--                                                    <input type="text" class="sign__input" placeholder="Season info">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-sm-4 col-md-3 col-xl-2">-->
+<!--                                                <button class="sign__btn sign__btn&#45;&#45;add"><span>add season</span></button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; episode &ndash;&gt;-->
+<!--                                    <div class="sign__episode">-->
+<!--                                        <div class="row">-->
+<!--                                            <div class="col-12">-->
+<!--                                                <span class="sign__episode-title">Episode #1</span>-->
+<!--                                                <button class="sign__delete" type="button">-->
+<!--                                                    <i class="ti ti-x"></i>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-md-6">-->
+<!--                                                <div class="sign__group">-->
+<!--                                                    <input type="text" class="sign__input" placeholder="Episode title 1">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-md-6">-->
+<!--                                                <div class="sign__group">-->
+<!--                                                    <input type="text" class="sign__input" placeholder="Air date">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12">-->
+<!--                                                <div class="sign__video">-->
+<!--                                                    <label id="s1s1" for="sign__video-upload1">Upload episode 1</label>-->
+<!--                                                    <input data-name="#s1s1" id="sign__video-upload1" name="s1s1" class="sign__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; end episode &ndash;&gt;-->
+
+<!--                                    &lt;!&ndash; episode &ndash;&gt;-->
+<!--                                    <div class="sign__episode">-->
+<!--                                        <div class="row">-->
+<!--                                            <div class="col-12">-->
+<!--                                                <span class="sign__episode-title">Episode #2</span>-->
+<!--                                                <button class="sign__delete" type="button">-->
+<!--                                                    <i class="ti ti-x"></i>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-md-6">-->
+<!--                                                <div class="sign__group">-->
+<!--                                                    <input type="text" class="sign__input" placeholder="Episode title 2">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-md-6">-->
+<!--                                                <div class="sign__group">-->
+<!--                                                    <input type="text" class="sign__input" placeholder="Air date">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-sm-8 col-md-9 col-xl-10">-->
+<!--                                                <div class="sign__video">-->
+<!--                                                    <label id="s1s2" for="sign__video-upload2">Upload episode 2</label>-->
+<!--                                                    <input data-name="#s1s2" id="sign__video-upload2" name="s1s2" class="sign__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="col-12 col-sm-4 col-md-3 col-xl-2">-->
+<!--                                                <button class="sign__btn sign__btn&#45;&#45;add"><span>add episode</span></button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; end episode &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; end season &ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <!-- end tv series -->
+
+                        <div class="col-12">
+                            <button type="submit" class="sign__btn sign__btn--small"><span>Add</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end form -->
+        </div>
+    </div>
+</main>
+<!-- end main content -->
+
+<!-- JS -->
+<th:block th:insert="/layout/admin-layout::js"></th:block>
+</body>
+
+<!-- Mirrored from hotflix.volkovdesign.com/admin/add-item.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jul 2024 09:43:03 GMT -->
+</html>

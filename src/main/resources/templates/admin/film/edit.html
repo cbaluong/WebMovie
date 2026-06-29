@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from hotflix.volkovdesign.com/admin/add-item.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jul 2024 09:43:03 GMT -->
+<head>
+    <th:block th:insert="/layout/admin-layout::head"></th:block>
+
+    <meta name="description" content="Online Movies, TV Shows & Cinema HTML Template">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>HotFlix – Online Movies, TV Shows & Cinema HTML Template</title>
+</head>
+
+<body>
+<!-- header -->
+<th:block th:insert="/layout/admin-layout::header"></th:block>
+<!-- end header -->
+
+<!-- sidebar -->
+<th:block th:insert="/layout/admin-layout::sidebar"></th:block>
+<!-- end sidebar -->
+
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Edit film</h2>
+                </div>
+            </div>
+            <!-- end main title -->
+
+            <!-- form -->
+            <div class="col-12">
+                <form th:action="@{|/admin/film/edit/${filmRequest.id}|}" method="post"
+                      class="sign__form sign__form--add" th:object="${filmRequest}" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-12 col-xl-7">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <input type="text" class="sign__input" placeholder="Name" th:field="*{name}">
+                                        <small style="color: red" th:if="${#fields.hasErrors('name')}"
+                                               th:errors="*{name}"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <textarea th:field="*{description}" id="text" name="text" class="sign__textarea"
+                                                  placeholder="Description"></textarea>
+                                        <small style="color: red" th:if="${#fields.hasErrors('description')}"
+                                               th:errors="*{description}"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <div class="sign__gallery">
+                                            <label id="gallery1" for="sign__gallery-upload">Upload Image
+                                                (240x340)</label>
+                                            <input name="file" data-name="#gallery1" id="sign__gallery-upload"
+                                                   class="sign__gallery-upload" type="file" accept=".png, .jpg, .jpeg"
+                                                   multiple="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-5">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <select th:field="*{isFree}" class="sign__selectjs" id="sign__quality">
+                                            <option value="true">Free</option>
+                                            <option value="false">Vip</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input th:field="*{releasedDate}" type="date" class="sign__input">
+                                        <small style="color: red" th:if="${#fields.hasErrors('releasedDate')}"
+                                               th:errors="*{releasedDate}"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <select name="categoryId" class="sign__selectjs" id="sign__genre" multiple>
+                                            <option th:each="cat:${categoryList}" th:text="${cat.name}"
+                                                    th:value="${cat.id}" th:selected="${setCategoryId.contains(cat.id)}"></option>
+                                        </select>
+<!--                                        <small style="color: red" th:if="${#fields.hasErrors('categorySet')}"-->
+<!--                                               th:errors="*{categorySet}"></small>-->
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="sign__group">
+                                        <input type="number" class="sign__input" placeholder="Time" th:field="*{time}">
+                                        <small style="color: red" th:if="${#fields.hasErrors('time')}"
+                                               th:errors="*{time}"></small>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <div class="sign__group">
+                                        <select name="countryId" class="sign__selectjs" id="sign__countryOnly">
+                                            <option th:each="ct:${countryList}" th:value="${ct.id}" th:text="${ct.name}"
+                                                    th:selected="${ct.id==countryId}"></option>
+                                        </select>
+                                        <!--                                        <small style="color: red" th:if="${#fields.hasErrors('countryId')}" th:errors="*{countryId}"></small>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="sign__group">
+                                <select name="directorsId" class="sign__selectjs" id="sign__director" multiple>
+                                    <option th:each="dir:${directorList}" th:value="${dir.id}"
+                                            th:text="${dir.name}" th:selected="${setDirectorId.contains(dir.id)}"></option>
+                                </select>
+<!--                                <small style="color: red" th:if="${#fields.hasErrors('directorsId')}"-->
+<!--                                       th:errors="*{directorSet}"></small>-->
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-xl-8">
+                            <div class="sign__group">
+                                <select name="actorsId" class="sign__selectjs" id="sign__actors" multiple>
+                                    <option th:each="act:${actorList}" th:value="${act.id}"
+                                            th:text="${act.name}" th:selected="${setActorId.contains(act.id)}"></option>
+                                </select>
+<!--                                <small style="color: red" th:if="${#fields.hasErrors('actorsId')}"-->
+<!--                                       th:errors="*{actorSet}"></small>-->
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="sign__group">
+                                <label class="sign__label">Item type:</label>
+                                <ul class="sign__radio">
+                                    <li>
+                                        <input th:field="*{seriesSingle}" value="true" id="type1" type="radio"
+                                               data-bs-toggle="collapse" data-bs-target=".multi-collapse" checked="">
+                                        <label for="type1">Movie</label>
+                                    </li>
+                                    <li>
+                                        <input th:field="*{seriesSingle}" value="false" id="type2" type="radio"
+                                               data-bs-toggle="collapse" data-bs-target=".multi-collapse">
+                                        <label for="type2">TV Series</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <button type="submit" class="sign__btn sign__btn--small"><span>Edit</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end form -->
+        </div>
+    </div>
+</main>
+<!-- end main content -->
+
+<!-- JS -->
+<th:block th:insert="/layout/admin-layout::js"></th:block>
+</body>
+
+<!-- Mirrored from hotflix.volkovdesign.com/admin/add-item.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jul 2024 09:43:03 GMT -->
+</html>
